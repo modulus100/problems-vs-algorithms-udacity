@@ -7,7 +7,24 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
-    pass
+    if number is None or number < 1:
+        raise Exception("Number minimum is 1")
+
+    high = number
+    low = 1
+
+    while low <= high:
+        middle = int((high + low) / 2)
+        current = middle ** 2
+
+        if current == number:
+            return middle
+        elif current < number:
+            low = middle + 1
+        elif current > number:
+            high = middle - 1
+
+    return high
 
 
 print("Pass" if (3 == sqrt(9)) else "Fail")
