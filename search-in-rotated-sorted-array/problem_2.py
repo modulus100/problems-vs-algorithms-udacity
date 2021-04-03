@@ -7,7 +7,44 @@ def rotated_array_search(input_list, number):
     Returns:
        int: Index or -1
     """
-    return 6
+    last_index = len(input_list) - 1
+    pivot = find_pivot(input_list, 0, last_index)
+
+    if pivot == -1:
+        return binary_search(input_list, 0, last_index, number)
+    if input_list[pivot] == number:
+        return pivot
+    if input_list[pivot] > number >= input_list[last_index]:
+        return binary_search(input_list, 0, pivot - 1, number)
+    return binary_search(input_list, pivot + 1, last_index, number)
+
+
+def find_pivot(arr: list, start: int, end: int) -> int:
+    if end < start:
+        return -1
+    if end == start:
+        return start
+
+    mid = int((start + end) / 2)
+    if mid < end and arr[mid] > arr[mid + 1]:
+        return mid
+    if mid > start and arr[mid] < arr[mid - 1]:
+        return mid - 1
+    if arr[start] > arr[mid]:
+        return find_pivot(arr, start, mid - 1)
+    return find_pivot(arr, mid + 1, end)
+
+
+def binary_search(arr: list, start: int, end: int, key: int) -> int:
+    if start > end:
+        return -1
+
+    mid = int((start + end) / 2)
+    if arr[mid] == key:
+        return mid
+    if arr[mid] > key:
+        return binary_search(arr, start, mid - 1, key)
+    return binary_search(arr, mid + 1, end, key)
 
 
 def linear_search(input_list, number):
