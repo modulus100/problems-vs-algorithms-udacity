@@ -10,7 +10,7 @@ def rotated_array_search(input_list, number):
     last_index = len(input_list) - 1
     pivot = find_pivot(input_list, 0, last_index)
 
-    if pivot == -1:
+    if pivot == -1 or pivot == last_index:
         return binary_search(input_list, 0, last_index, number)
     if input_list[pivot] == number:
         return pivot
@@ -63,8 +63,15 @@ def test_function(test_case):
         print("Fail")
 
 
+print("Test usual cases")
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 6])
 test_function([[6, 7, 8, 9, 10, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 8])
 test_function([[6, 7, 8, 1, 2, 3, 4], 1])
 test_function([[6, 7, 8, 1, 2, 3, 4], 10])
+
+print("\nTest empty array")
+test_function([[], 9])
+
+print("\nTest unshift array")
+test_function([[1, 2, 3, 4, 5, 6, 7], 4])
