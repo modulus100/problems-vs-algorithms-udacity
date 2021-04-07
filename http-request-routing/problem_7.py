@@ -27,7 +27,6 @@ class Router:
         if found_handler:
             raise Exception("handler is already added")
 
-
     def is_root_handler(self, path: string) -> bool:
         return len(path) == 1 and path[0] == '/'
 
